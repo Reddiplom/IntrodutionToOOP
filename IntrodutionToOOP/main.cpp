@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std; 
-
+#define DISTANCE_CHECK
+#define delimiter "\n--------------------------------------------------\n"
 
 class Point
 {
@@ -34,7 +35,7 @@ public:
 	{	
 		this -> x = x;
 		this -> y = 0;
-		cout << "DefaultConstructor:\t" << this << endl;
+		cout << "DefaultConstructor:\t\t" << this << endl;
 	}	
 	
 	Point(double x , double y)
@@ -43,14 +44,19 @@ public:
 		this -> y = y;
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-
+	Point(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyConstructor:\t" << this << endl;
+	}
 	~Point()
 	{
 		cout << "Destructor:\t\t" << this << endl;
 	}
 
 	//      Methods
-	double distance(Point other)
+	double distance(Point& other)
 	{
 		double x_distance = this->x - other.x;
 		double y_distance = this->y - other.y;
@@ -63,7 +69,7 @@ public:
 	}
 };
 //#define STRUCT_POINT
-double distance(Point A, Point B)
+double distance(Point& A, Point& B)
 {
 	double x_distance = A.get_x() - B.get_x();
 	double y_distance = A.get_y() - B.get_y();
@@ -95,7 +101,15 @@ void main()
 	B.print();
 	Point C(7, 8);
 	C.print();
+	Point D = C;
+	D.print();
+#ifdef DISTANCE_CHECK
+	cout << delimiter << endl;
 	cout << A.distance(C) << endl;
-	cout << distance(A , C) << endl;
+	cout << delimiter << endl; 
+	cout << distance(A, C) << endl;
+	cout << delimiter << endl; 
+#endif // DISTANCE_CHECK
+
 
 }
