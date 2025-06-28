@@ -151,6 +151,13 @@ public:
 		else if (integer == 0)cout << 0;
 		cout << endl;
 	}
+	friend istream& operator>>(istream& is, Fraction& f) {
+		char slash;
+		is >> f.numerator >> slash >> f.denominator;
+		if (f.denominator == 0) f.denominator = 1;
+		f.integer = 0; // Предполагаем простую дробь без целой части
+		return is;
+	}
 };
 
 Fraction operator*( Fraction left,  Fraction right)
@@ -244,7 +251,7 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 }
 //#define CONSTRUCTORS_CHECK
 //#define ASSIGMENT_CHECK
-#define ARITHMETICAL_OPERATORS
+//#define ARITHMETICAL_OPERATORS
 //#define INCREMENT_DECREMENT
 void main()
 {
@@ -299,5 +306,9 @@ void main()
 	A.print();
 	B.print();
 #endif // INCREMENT_DECREMENT
-	
+	Fraction A;
+	cout << "Введите простую дробь (в формате числитель/знаменатель): ";
+	cin >> A;
+	cout << "Вы ввели: " << A << endl;
+
 }
