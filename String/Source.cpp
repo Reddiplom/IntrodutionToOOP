@@ -1,5 +1,7 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <cstring> // для strlen, strcpy
+#include <cstring>
+//#define CONSTRUCTORS_CHECK
 
 using namespace std;
 
@@ -68,3 +70,20 @@ public:
     size_t get_length() const { return length; }
     const char* c_str() const { return data; }
 };
+void main()
+{
+#ifdef CONSTRUCTORS_CHECK
+    String str1 = "String";
+    String str2 = "Hello";
+
+    String str3 = str2;
+#endif // CONSTRUCTORS_CHECK
+
+    String str1 = "Hello";
+    String str2 = "World";
+    String str3;
+    str3 = str1 + str2; 
+    cout << str1 << endl;
+    cout << str2 << endl;
+    cout << str3 << endl;
+}
